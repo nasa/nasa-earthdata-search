@@ -704,15 +704,8 @@ describe('TemporalSelectionDropdown component', () => {
   })
 
   describe('TemporalSelectionDropdown when dates aren\'t set', () => {
-    beforeAll(() => {
-      MockDate.set('2024-02-01T06:00:00.000Z')
-    })
-
-    afterAll(() => {
-      MockDate.reset()
-    })
-
     test('handles recurring toggle with only start date set', async () => {
+      MockDate.set('2024-02-01T06:00:00.000Z')
       const onChangeQueryMock = jest.fn()
       const user = userEvent.setup()
 
@@ -764,9 +757,12 @@ describe('TemporalSelectionDropdown component', () => {
           }
         }
       })
+
+      MockDate.reset()
     })
 
     test('handles recurring toggle with unset dates', async () => {
+      MockDate.set('2024-02-01T06:00:00.000Z')
       const onChangeQueryMock = jest.fn()
       const user = userEvent.setup()
 
@@ -818,9 +814,12 @@ describe('TemporalSelectionDropdown component', () => {
           }
         }
       })
+
+      MockDate.reset()
     })
 
     test('handles recurring toggle with only end date set', async () => {
+      MockDate.set('2024-02-01T06:00:00.000Z')
       const onChangeQueryMock = jest.fn()
       const user = userEvent.setup()
 
@@ -872,6 +871,8 @@ describe('TemporalSelectionDropdown component', () => {
           }
         }
       })
+
+      MockDate.reset()
     })
   })
 })
