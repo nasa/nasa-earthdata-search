@@ -529,6 +529,23 @@ const SpatialSelection = (props) => {
   // Callback from EditControl, called when the controls are mounted
   const onMounted = (newDrawControl) => {
     drawControl.current = newDrawControl
+
+    // Add aria-labels to draw buttons
+    const drawToolbar = document.querySelector('.leaflet-draw-toolbar')
+    if (drawToolbar) {
+      const buttons = drawToolbar.querySelectorAll('.leaflet-draw-draw-circle, .leaflet-draw-draw-polygon, .leaflet-draw-draw-rectangle, .leaflet-draw-draw-marker')
+      buttons.forEach((button) => {
+        if (button.classList.contains('leaflet-draw-draw-circle')) {
+          button.setAttribute('aria-label', 'Draw a spatial circle')
+        } else if (button.classList.contains('leaflet-draw-draw-polygon')) {
+          button.setAttribute('aria-label', 'Draw a spatial polygon')
+        } else if (button.classList.contains('leaflet-draw-draw-rectangle')) {
+          button.setAttribute('aria-label', 'Draw a spatial rectangle')
+        } else if (button.classList.contains('leaflet-draw-draw-marker')) {
+          button.setAttribute('aria-label', 'Draw a spatial coordinate')
+        }
+      })
+    }
   }
 
   // Trigger a leaflet drawing from the spatial dropdown
