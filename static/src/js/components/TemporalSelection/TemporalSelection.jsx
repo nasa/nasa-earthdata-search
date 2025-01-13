@@ -129,7 +129,7 @@ export class TemporalSelection extends Component {
     }
 
     const { minimumTemporalDateString, temporalDateFormatFull } = getApplicationConfig()
-    const minimumTemporalDate = moment(minimumTemporalDateString, temporalDateFormatFull)
+    const minimumTemporalDate = moment(minimumTemporalDateString, temporalDateFormatFull).utc()
 
     let sliderStartDate = moment(temporal.startDate).utc()
     if (!sliderStartDate.isValid()) {
