@@ -129,6 +129,7 @@ export class TemporalSelection extends Component {
     }
 
     const { minimumTemporalDateString, temporalDateFormatFull } = getApplicationConfig()
+    console.log("🚀 ~ TemporalSelection ~ render ~ minimumTemporalDateString:", minimumTemporalDateString)
     const minimumTemporalDate = moment(minimumTemporalDateString, temporalDateFormatFull).utc()
 
     let sliderStartDate = moment(temporal.startDate).utc()
@@ -156,6 +157,7 @@ export class TemporalSelection extends Component {
         'temporal-selection__input-group--end'
       )
     }
+    console.log('🚀 ~ TemporalSelection ~ render ~ minimumTemporalDateString:', minimumTemporalDateString)
 
     return (
       <div className={classes.temporalSelection}>
