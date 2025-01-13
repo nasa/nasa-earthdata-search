@@ -133,7 +133,7 @@ export class TemporalSelection extends Component {
 
     let sliderStartDate = moment(temporal.startDate).utc()
     if (!sliderStartDate.isValid()) {
-      sliderStartDate = moment()
+      sliderStartDate = moment().utc()
       sliderStartDate.set({
         year: minimumTemporalDate.year(),
         hour: 0,
