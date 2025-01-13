@@ -134,10 +134,67 @@ const TemporalSelectionDropdown = ({
       })
     }
 
-    setTemporal({
-      ...temporal,
-      isRecurring: isChecked
-    })
+    try {
+      if (isChecked) {
+        const {
+          startDate: existingStartDate,
+          endDate: existingEndDate
+        } = temporal
+        const { minimumTemporalDateString, temporalDateFormatFull } = getApplicationConfig()
+        const minDate = moment(minimumTemporalDateString, temporalDateFormatFull)
+
+        // When both dates exist and are in the same year, adjust start to min year
+        if (existingStartDate && existingEndDate) {
+          const startYear = moment(existingStartDate).utc().year()
+          const endYear = moment(existingEndDate).utc().year()
+          if (startYear === endYear) {
+            setTemporal({
+              ...temporal,
+              isRecurring: isChecked,
+              startDate: moment(existingStartDate).utc().year(minDate.year()).toISOString(),
+              endDate: existingEndDate
+            })
+
+            return
+          }
+        }
+
+        // When only start date exists and is in current year, use full range
+        if (existingStartDate && !existingEndDate) {
+          const startYear = moment(existingStartDate).utc().year()
+          const currentYear = moment().utc().year()
+          if (startYear === currentYear) {
+            setTemporal({
+              ...temporal,
+              isRecurring: isChecked,
+              startDate: minDate.startOf('year').toISOString(),
+              endDate: moment().utc().toISOString()
+            })
+
+            return
+          }
+        }
+
+        setTemporal({
+          ...temporal,
+          isRecurring: isChecked,
+          startDate: existingStartDate || minDate.utc().startOf('year').toISOString(),
+          endDate: existingEndDate || moment.utc().toISOString()
+        })
+
+        return
+      }
+
+      setTemporal({
+        ...temporal,
+        isRecurring: isChecked
+      })
+    } catch (error) {
+      setTemporal({
+        ...temporal,
+        isRecurring: isChecked
+      })
+    }
   }
 
   /**
@@ -266,6 +323,16 @@ const TemporalSelectionDropdown = ({
             onClearClick={onClearClick}
             onInvalid={onInvalid}
             onRecurringToggle={onRecurringToggle}
+            onSliderChange={
+              (value) => {
+                const { min, max } = value
+                setTemporal({
+                  ...temporal,
+                  startDate: moment(temporal.startDate).year(min).toISOString(),
+                  endDate: moment(temporal.endDate).year(max).toISOString()
+                })
+              }
+            }
             onValid={onValid}
             setEndDate={setEndDate}
             setStartDate={setStartDate}
