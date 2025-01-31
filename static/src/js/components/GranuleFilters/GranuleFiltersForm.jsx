@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Form as FormikForm } from 'formik'
-import {
-  Col,
-  Form,
-  OverlayTrigger,
-  Tooltip,
-  Row
-} from 'react-bootstrap'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Row from 'react-bootstrap/Row'
+import Tooltip from 'react-bootstrap/Tooltip'
+
 import { FaQuestionCircle } from 'react-icons/fa'
 import moment from 'moment'
 
@@ -329,7 +328,13 @@ export const GranuleFiltersForm = (props) => {
                       )
                     }
                   >
-                    <EDSCIcon icon={FaQuestionCircle} size="0.625rem" variant="more-info" aria-label="A question mark in a circle" role="img" />
+                    <EDSCIcon
+                      aria-label="A question mark in a circle"
+                      icon={FaQuestionCircle}
+                      role="img"
+                      size="0.625rem"
+                      variant="more-info"
+                    />
                   </OverlayTrigger>
                   <Form.Control
                     name="readableGranuleName"
@@ -687,7 +692,7 @@ export const GranuleFiltersForm = (props) => {
                     <Form.Group
                       as={Row}
                       controlId="granule-filters__cloud-cover-min"
-                      noGutters
+                      nogutters="true"
                     >
                       <Form.Label column sm={5}>
                         Minimum
@@ -716,7 +721,7 @@ export const GranuleFiltersForm = (props) => {
                     <Form.Group
                       as={Row}
                       controlId="granule-filters__cloud-cover-max"
-                      noGutters
+                      nogutters="true"
                     >
                       <Form.Label column sm={5}>
                         Maximum
@@ -755,7 +760,7 @@ export const GranuleFiltersForm = (props) => {
                         className="mb-1"
                         as={Row}
                         controlId="granule-filters__orbit-number-min"
-                        noGutters
+                        nogutters="true"
                       >
                         <Form.Label column="sm">
                           Minimum
@@ -786,7 +791,7 @@ export const GranuleFiltersForm = (props) => {
                         as={Row}
                         controlId="granule-filters__orbit-number-max"
                         size="sm"
-                        noGutters
+                        nogutters="true"
                       >
                         <Form.Label column="sm" sm={5}>
                           Maximum
@@ -822,7 +827,7 @@ export const GranuleFiltersForm = (props) => {
                         className="mb-1"
                         as={Row}
                         controlId="granule-filters__equatorial-crossing-longitude-min"
-                        noGutters
+                        nogutters="true"
                       >
                         <Form.Label column="sm" sm={5}>
                           Minimum
@@ -855,7 +860,7 @@ export const GranuleFiltersForm = (props) => {
                       <Form.Group
                         as={Row}
                         controlId="granule-filters__equatorial-crossing-longitude-max"
-                        noGutters
+                        nogutters="true"
                       >
                         <Form.Label column="sm" sm={5}>
                           Maximum
