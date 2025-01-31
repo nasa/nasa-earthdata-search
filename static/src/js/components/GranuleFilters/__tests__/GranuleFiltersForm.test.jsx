@@ -489,8 +489,9 @@ describe('GranuleFiltersForm component', () => {
           expect(setFieldTouched).toHaveBeenCalledTimes(1)
           expect(setFieldTouched).toHaveBeenCalledWith('temporal.isRecurring', true)
 
-          expect(setFieldValue).toHaveBeenCalledTimes(3)
+          expect(setFieldValue).toHaveBeenCalledTimes(4)
           expect(setFieldValue).toHaveBeenCalledWith('temporal.isRecurring', true)
+          expect(setFieldValue).toHaveBeenCalledWith('temporal.startDate', '1960-08-13T00:00:00.000Z')
           expect(setFieldValue).toHaveBeenCalledWith('temporal.recurringDayStart', 225)
           expect(setFieldValue).toHaveBeenCalledWith('temporal.recurringDayEnd', 226)
 
@@ -1649,7 +1650,7 @@ describe('GranuleFiltersForm component', () => {
   })
 
   describe('End date submission behavior', () => {
-    test.only('when submitting end date in same year as start date with recurring enabled, adjusts start date to minimum year', async () => {
+    test('when submitting end date in same year as start date with recurring enabled, adjusts start date to minimum year', async () => {
       MockDate.set('2024-12-15')
 
       const {
